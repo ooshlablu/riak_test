@@ -245,6 +245,7 @@ remove_index_dirs(Nodes, IndexName) ->
     [rt:stop(ANode) || ANode <- Nodes],
     [rt:del_dir(binary_to_list(IndexDir)) || IndexDir <- IndexDirs],
     [rt:start(ANode) || ANode <- Nodes],
+    rt:wait_for_cluster_service(Nodes, yokozuna),
     ok.
 
 %% @doc Check if index/core exists in metadata, disk via yz_index:exists.
